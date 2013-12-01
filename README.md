@@ -1,9 +1,5 @@
 ##Dangerous Chef Pioneer
 
-## The Challenge
-
->Make sure you have a README file that includes a brief description of your game, what open source projects (if any) you used, and a screenshot.
-
 ##Screenshot
 ![image](http://i.imgur.com/NiVFTu3.png)
 
