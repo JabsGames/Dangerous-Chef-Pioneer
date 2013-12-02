@@ -69,8 +69,8 @@
 				padding-left:25px;
 				padding-top:16px;
 				padding-bottom:16px;
-				z-index: 0;
 				background-color:#0C1713;
+				z-index: 20;
 			}
 
 			#loader {
@@ -80,7 +80,6 @@
 				height:45px;
 				left:625px;
 				border:1px solid #EEE;
-				z-index: 1;
 			}
 
 			#loaderinner {
@@ -97,6 +96,16 @@
 
 			#c {
 				background-image:url(bg.png);
+			}
+
+			#cover {
+				position:absolute;
+				width:1024px;
+				height:715px;
+				/*opacity:0;*/
+				left:8px;
+				top:8px;
+				background-color:#0C1713;
 			}
 		</style>
 	</head>
@@ -126,10 +135,10 @@
 		<div id = 'desc'>
 			<center>"Dangerous Chef Pioneer" is a psychological top down shooter game. </br></center>
 			<p></p>
-			There are two players. Each one takes turns controlling their character for 3 seconds into the future of the game (with the one not taking his/her turn looking away). Then, the two turns are combined, and the result is shown on the screen to both players in real time. The game then repeats until one player destroys the other.</br>
+			There are two players. Each one takes turns controlling their character for 3 seconds into the future of the game (with the one not taking his/her turn looking away). Then, the two turns are combined, and the result is shown on the screen to both players in real time. The game then repeats until one player destroys the other (with a projectile).</br>
 			<p></p>
 			Controls:</br>
-			Press the button at the bottom to move through the game.</br>
+			PRESS THE BUTTON AT THE BOTTOM TO MOVE THROUGH THE GAME.</br>
 			To control characters (turn by turn), use WASD to move and the mouse to shoot.
 			<p></p>
 			NOTE:</br>
@@ -145,6 +154,7 @@
 			</div>
 		</div>
 		<canvas id='c' width='1024' height='640'></canvas>
+		<div id='cover'></div>
 		<!-- 
 			32 * 20
 		-->
@@ -175,6 +185,7 @@
 			window.mPos = {x:0,y:0};
 			$('#loader').hide();
 			$('#loaderinner').hide();
+			$('#cover').hide();
 
 			window.tDelta = 1;
 			window.addEventListener("keydown", function (e) {
@@ -257,39 +268,37 @@
 
 
 			(function renderLoop(){
-				if (!stopped) {
-					cte++;
-					ctx.clearRect(0,0,1024,640);
-					ctx.fillStyle = "rgb(100,100,100)"
-					if (activePlayer == player1) {
-						player1.keyHandlers();
-						setFiring(player1);
-					}
-					else {
-						if (activePlayer == player2) {
-							player2.keyHandlers();
-							setFiring(player2);
-						}
-					}
-					// drawMap(mapData,ctx);
-					calcDecay();
-
-					drawBullets();
-					player1.draw();
-					player2.draw();
-
-					// ctx.beginPath();
-					// ctx.lineTo(draw1[0],draw1[1]);
-					// ctx.lineTo(draw2[0],draw2[1]);
-					// ctx.closePath();
-					// ctx.stroke();
-					recordFrame();
-					playBackFrame();
-					if (playingBack == 1) {
-						checkBulletsPlayers();
-					}
-					requestAnimFrame(renderLoop);
+				cte++;
+				ctx.clearRect(0,0,1024,640);
+				ctx.fillStyle = "rgb(100,100,100)"
+				if (activePlayer == player1) {
+					player1.keyHandlers();
+					setFiring(player1);
 				}
+				else {
+					if (activePlayer == player2) {
+						player2.keyHandlers();
+						setFiring(player2);
+					}
+				}
+				// drawMap(mapData,ctx);
+				calcDecay();
+
+				drawBullets();
+				player1.draw();
+				player2.draw();
+
+				// ctx.beginPath();
+				// ctx.lineTo(draw1[0],draw1[1]);
+				// ctx.lineTo(draw2[0],draw2[1]);
+				// ctx.closePath();
+				// ctx.stroke();
+				recordFrame();
+				playBackFrame();
+				if (playingBack == 1) {
+					checkBulletsPlayers();
+				}
+				requestAnimFrame(renderLoop);
 			})();
 
 		</script>

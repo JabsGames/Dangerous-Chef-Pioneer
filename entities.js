@@ -71,7 +71,8 @@ function mainCharacter(x,y,context,pno) {
 					var next = 0;
 					var next2 = 0;
 					var intersected = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
-					var intersected2 = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
+					// var intersected2 = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
+					var currentLowestDistSq = 99999999999;
 					for (var seg = 0; seg < mapData['vertices'][wall].length; seg++) {
 						if (seg == 3) {
 							next = 0;
@@ -87,14 +88,18 @@ function mainCharacter(x,y,context,pno) {
 								next2 = seg2 + 1;
 							}
 							if (intersect(nextVertices[seg2].x,nextVertices[seg2].y,nextVertices[next2].x,nextVertices[next2].y,mapData['vertices'][wall][seg].x,mapData['vertices'][wall][seg].y,mapData['vertices'][wall][next].x,mapData['vertices'][wall][next].y)) {
+								// var cDist = distToSegmentSquared({x:this.x + 16,y:this.y + 16}, {x:mapData['vertices'][wall][seg].x,y:mapData['vertices'][wall][seg].y},{x:mapData['vertices'][wall][next].x,y:mapData['vertices'][wall][next].y});
+								// if (cDist < currentLowestDistSq) {
+								// intersected = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
 								intersected[seg][next] = true;
-								intersected2[seg2][next2] = true;
+								// currentLowestDistSq = cDist;
+								// }
 							}
 						}
 					}
 					
 				}
-	
+
 				for (var dd in intersected) {
 					// debugger;
 					if (intersected[0][1]) { //top edge +
@@ -320,6 +325,7 @@ function recordFrame() {
 }
 
 function playBack(player) {
+	$('#txtbuttons').html("<div>Playing back...</div>");
 	window.playingBack = 1;
 	window.cIndex = 0;
 }
@@ -377,21 +383,24 @@ function setFiring(plyr) {
 }
 
 function win(qui) {
-	stopped = 1;
+	playingBack = 0;
+	tDelta = 0;
 	ctx.clearRect(0,0,1024,640);
-	$('#c').css('background-color','#0C1713');
-	$('#c').css('background-image','none');
+	$('#cover').fadeIn(2500,function(){
+		$('#c').css('background-color','#0C1713');
+		$('#c').css('background-image','none');
 
-	$("#title").html("<center>" + qui + " wins!</center>");
-	$("#title").css("width","1024px");
-	$("#title").css("left","30px");
-	$('#title').show();
-	$('#title').css('top','50px');
-	$('#loader').hide();
-	$('#loaderinner').hide();
+		$("#title").html("<center>" + qui + " wins!</center>");
+		$("#title").css("width","1024px");
+		$("#title").css("left","30px");
+		$('#title').show();
+		$('#title').css('top','50px');
+		$('#loader').hide();
+		$('#loaderinner').hide();
 
-	$("#desc").html("<center>Reload the page to play again! :)</center>");
-	$('#desc').show();
+		$("#desc").html("<center>Reload the page to play again! :)</center>");
+		$('#desc').show();
 
-	$("#btns").html('');
+		$("#btns").html('');
+	});
 }
