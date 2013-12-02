@@ -88,12 +88,38 @@ function mainCharacter(x,y,context,pno) {
 								next2 = seg2 + 1;
 							}
 							if (intersect(nextVertices[seg2].x,nextVertices[seg2].y,nextVertices[next2].x,nextVertices[next2].y,mapData['vertices'][wall][seg].x,mapData['vertices'][wall][seg].y,mapData['vertices'][wall][next].x,mapData['vertices'][wall][next].y)) {
-								// var cDist = distToSegmentSquared({x:this.x + 16,y:this.y + 16}, {x:mapData['vertices'][wall][seg].x,y:mapData['vertices'][wall][seg].y},{x:mapData['vertices'][wall][next].x,y:mapData['vertices'][wall][next].y});
-								// if (cDist < currentLowestDistSq) {
-								// intersected = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
-								intersected[seg][next] = true;
-								// currentLowestDistSq = cDist;
-								// }
+								var modx = 0;
+								var mody = 0;
+								var mod2x = 0;
+								var mod2y = 0;
+								if (mapData['vertices'][wall][seg].x == mapData['vertices'][wall][next].x) {
+									if (mapData['vertices'][wall][seg].y > mapData['vertices'][wall][next].y) {
+										mody = -3;
+										mod2y = 3;
+									}
+									else {
+										mody = 3;
+										mod2y = -3;
+									}
+								}
+
+								if (mapData['vertices'][wall][seg].y == mapData['vertices'][wall][next].y) {
+									if (mapData['vertices'][wall][seg].x > mapData['vertices'][wall][next].x) {
+										modx = -3;
+										mod2x = 3;
+									}
+									else {
+										modx = 3;
+										mod2x = -3;	
+									}
+								}
+
+								var cDist = distToSegmentSquared({x:this.x + 16,y:this.y + 16}, {x:mapData['vertices'][wall][seg].x + modx,y:mapData['vertices'][wall][seg].y + mody},{x:mapData['vertices'][wall][next].x + mod2x,y:mapData['vertices'][wall][next].y + mod2y});
+								if (cDist < currentLowestDistSq) {
+									intersected = [[false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]];
+									intersected[seg][next] = true;
+									currentLowestDistSq = cDist;
+								}
 							}
 						}
 					}
