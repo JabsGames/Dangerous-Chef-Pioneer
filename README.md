@@ -19,7 +19,7 @@ Player 2 is ORANGE
 ##Open Source Projects
 •jQuery
 
-##Sprites
+##Background Tiles
 •The tiles for the backround are from the game Realm of the Mad God, owned by Kabam. They are used with Kabam's permission.
 
 ##The Theme
