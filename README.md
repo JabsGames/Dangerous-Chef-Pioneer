@@ -19,5 +19,8 @@ Player 2 is ORANGE
 ##Open Source Projects
 •jQuery
 
+##Background Tiles
+•The tiles for the backround are from the game Realm of the Mad God, owned by Kabam. They are used with Kabam's permission.
+
 ##The Theme
 This relates to the theme of the competition in that the rate of /change/ is controlled, and that changes are repeatedly parted, rolled back, repeated, and then added up together.
