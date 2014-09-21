@@ -9,7 +9,7 @@
   },
   "app": {
     "urls": [
-    "http://meadowstream.github.io/Dangerous-Chef-Pioneer/"
+      "http://meadowstream.github.io/Dangerous-Chef-Pioneer/"
     ],
     "launch": {
       "web_url": "http://meadowstream.github.io/Dangerous-Chef-Pioneer/"
