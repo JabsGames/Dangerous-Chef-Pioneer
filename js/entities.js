@@ -127,7 +127,6 @@ function mainCharacter(x,y,context,pno) {
 				}
 
 				for (var dd in intersected) {
-					// debugger;
 					if (intersected[0][1]) { //top edge +
 						this.ay = 0;
 					}
@@ -403,7 +402,6 @@ function setFiring(plyr) {
 				recordingData.bullets[cte] = ({x:rPoints.x,y:rPoints.y,vx:normX * 20,vy:normY * 20,p:activePlayer.pno});
 			}
 		}
-
 		ct++;
 	}
 }

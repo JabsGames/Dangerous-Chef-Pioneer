@@ -17,15 +17,16 @@ function doPolygonsIntersect(a, b) {
 				x: p2.y - p1.y,
 				y: p1.x - p2.x
 			};
-
 			minA = maxA = undefined;
 			// for each vertex in the first shape, project it onto the line perpendicular to the edge
 			// and keep track of the min and max of these values
 			for (j = 0; j < a.length; j++) {
 				projected = normal.x * a[j].x + normal.y * a[j].y;
+				// console.log('a');
 				if (isUndefined(minA) || projected < minA) {
 					minA = projected;
 				}
+				// console.log('b');
 				if (isUndefined(maxA) || projected > maxA) {
 					maxA = projected;
 				}
@@ -77,7 +78,7 @@ function distToSegment(p, v, w) {
 }
 
 function isUndefined(zz) {
-	if (zz === undefined) {
+	if (typeof zz === 'undefined') {
 		return true;
 	}
 }
@@ -130,6 +131,7 @@ function drawBullets() {
 					break;
 				}
 			}
+
 			if (!intersection) {
 				this.ctx.save();
 				this.ctx.translate(bullets[i]["x"] + w/2,bullets[i]["y"] + h/2);
@@ -142,7 +144,6 @@ function drawBullets() {
 			}
 		}
 	}
-
 	bulletsToDestroy = reverseInsertionSort(bulletsToDestroy);
 
 	for (var j = 0; j < bulletsToDestroy.length; j++) {
