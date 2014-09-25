@@ -1,3 +1,5 @@
+##[Get it on the Chrome Web Store!](https://chrome.google.com/webstore/developer/edit/lippegdpgokgbkhbnhepemckdlcaopca)
+
 ##Dangerous Chef Pioneer
 
 ##Screenshot
